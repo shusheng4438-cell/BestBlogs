@@ -274,6 +274,174 @@ body {
   vertical-align: middle;
 }
 
+// ========================
+// 深度分析版专用组件
+// ========================
+
+// 事实陈述框
+.fact-box {
+  background: #f0f7ff !important;
+  border-left: 4px solid #3b82f6 !important;
+  padding: 14px 18px !important;
+  margin: 12px 0 18px !important;
+  border-radius: 0 8px 8px 0 !important;
+  font-size: 0.95rem;
+  line-height: 1.65;
+  color: #1e3a5f;
+}
+
+// 机会三列网格
+.opportunity-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 14px;
+  margin: 14px 0 20px;
+}
+
+.opp-card {
+  background: #fafbfc;
+  border: 1px solid $border-color;
+  border-radius: 10px;
+  padding: 16px;
+  font-size: 0.9rem;
+  line-height: 1.6;
+  transition: box-shadow 0.15s;
+
+  &:hover {
+    box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+  }
+
+  p { margin-bottom: 6px; }
+
+  strong {
+    display: block;
+    margin-bottom: 6px;
+    font-size: 0.95rem;
+  }
+}
+
+.opp-card.entrepreneur {
+  border-top: 3px solid #f59e0b;
+}
+
+.opp-card.investor {
+  border-top: 3px solid #10b981;
+}
+
+.opp-card.individual {
+  border-top: 3px solid #6366f1;
+}
+
+// 文章元数据行
+.article-meta {
+  font-size: 0.85rem;
+  color: $text-light;
+  margin: 12px 0 4px;
+  padding: 8px 0;
+
+  a {
+    color: $primary-color;
+    font-weight: 500;
+  }
+
+  .category-tag {
+    display: inline-block;
+    background: #eff6ff;
+    color: $primary-color;
+    padding: 1px 8px;
+    border-radius: 10px;
+    font-size: 0.82rem;
+  }
+}
+
+// 机会雷达表格
+.radar-table {
+  overflow-x: auto;
+  margin: 14px 0 20px;
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.92rem;
+  }
+
+  th {
+    background: #1e293b;
+    color: #fff;
+    padding: 10px 14px;
+    text-align: left;
+    font-weight: 600;
+    font-size: 0.9rem;
+  }
+
+  td {
+    padding: 10px 14px;
+    border-bottom: 1px solid $border-color;
+    vertical-align: top;
+  }
+
+  tr:nth-child(even) td {
+    background: #f8fafc;
+  }
+
+  tr:hover td {
+    background: #eef2ff;
+    transition: background 0.15s;
+  }
+}
+
+// 行动建议折叠面板
+.action-hint {
+  margin: 16px 0 24px;
+  background: #fffbeb;
+  border: 1px solid #fcd34d;
+  border-radius: 10px;
+  padding: 14px 18px;
+  font-size: 0.92rem;
+
+  summary {
+    cursor: pointer;
+    font-weight: 600;
+    color: #92400e;
+    user-select: none;
+  }
+
+  p { margin-bottom: 4px; }
+
+  ul, ol {
+    margin-top: 8px;
+    margin-left: 20px;
+    color: #78350f;
+  }
+}
+
+// 页脚通讯
+.newsletter-footer {
+  background: linear-gradient(135deg, #1e293b, #0f172a);
+  color: #cbd5e1;
+  padding: 28px 24px;
+  border-radius: 12px;
+  margin-top: 20px;
+  font-size: 0.92rem;
+
+  h2 {
+    color: #f1f5f9 !important;
+    border-left: 4px solid #3b82f6 !important;
+    padding-left: 14px !important;
+    margin-top: 0 !important;
+    margin-bottom: 12px !important;
+  }
+
+  a {
+    color: #60a5fa;
+    text-decoration: none;
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+}
+
 // Responsive
 @media (max-width: 640px) {
   .site-header {
@@ -294,5 +462,33 @@ body {
 
   .site-content h1 {
     font-size: 1.5rem;
+  }
+
+  // 深度分析版移动端适配
+  .opportunity-grid {
+    grid-template-columns: 1fr;
+    gap: 10px;
+  }
+
+  .opp-card {
+    padding: 12px 14px;
+  }
+
+  .radar-table {
+    font-size: 0.82rem;
+
+    th, td {
+      padding: 8px 10px;
+    }
+  }
+
+  .newsletter-footer {
+    padding: 20px 16px;
+    font-size: 0.85rem;
+  }
+
+  .fact-box {
+    padding: 10px 14px !important;
+    font-size: 0.9rem;
   }
 }
