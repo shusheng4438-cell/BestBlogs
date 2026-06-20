@@ -13,23 +13,16 @@ on:
         default: ''
 
 jobs:
-  generate-and-deploy:
+  generate:
     runs-on: ubuntu-latest
     permissions:
       contents: write
-      pages: write
-      id-token: write
 
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
         with:
           fetch-depth: 0
-
-      - name: Setup Ruby
-        uses: ruby/setup-ruby@v1
-        with:
-          ruby-version: '3.3'
 
       - name: Setup Node.js
         uses: actions/setup-node@v4
@@ -39,49 +32,20 @@ jobs:
       - name: Generate AI News Digest
         env:
           DEEPSEEK_API_KEY: ${{ secrets.DEEPSEEK_API_KEY }}
-          TARGET_DATE: ${{ github.event.inputs.date || '' }}
         run: |
           node .github/workflows/generate-news.js
 
-      - name: Build Jekyll site
-        run: |
-          gem install bundler
-          bundle install
-          bundle exec jekyll build
-
-      - name: Setup Pages
-        uses: actions/configure-pages@v5
-
-      - name: Upload artifact
-        uses: actions/upload-pages-artifact@v4
-        with:
-          path: ./_site
-
-      - name: Commit and push generated content
+      - name: Commit and push new content
         run: |
           git config user.name "BestBlogs AI Bot"
           git config user.email "ai-bot@bestblogs.dev"
 
-          # Check if there are new posts
-          if git diff --quiet && git diff --staged --quiet; then
+          git add _posts/
+
+          if git diff --cached --quiet; then
             echo "No new content to commit."
           else
-            git add _posts/ index.md
-            git commit -m "🤖 [AI] 每日早报 $(date +%Y-%m-%d)"
+            git commit -m "🤖 [AI] 每日早报 $(TZ='Asia/Shanghai' date +%Y-%m-%d)"
             git push
+            echo "✅ New content committed and pushed."
           fi
-
-  deploy:
-    needs: generate-and-deploy
-    runs-on: ubuntu-latest
-    permissions:
-      pages: write
-      id-token: write
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
-
-    steps:
-      - name: Deploy to GitHub Pages
-        id: deployment
-        uses: actions/deploy-pages@v4
