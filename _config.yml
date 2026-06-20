@@ -1,0 +1,43 @@
+# BestBlogs 自建版 - Jekyll 配置
+title: "我的早报"
+description: "每日AI精选资讯"
+author: "shusheng4438-cell"
+language: "zh-CN"
+baseurl: "/BestBlogs"
+url: "https://shusheng4438-cell.github.io"
+
+# 时区设置
+timezone: Asia/Shanghai
+
+# 构建设置
+markdown: kramdown
+highlighter: rouge
+
+# 分页设置
+paginate: 10
+paginate_path: "/page:num/"
+
+# 插件
+plugins:
+  - jekyll-paginate
+  - jekyll-feed
+  - jekyll-seo-tag
+
+# 排除文件
+exclude:
+  - Gemfile
+  - Gemfile.lock
+  - README.md
+  - .github/
+
+# 默认 Front Matter
+defaults:
+  - scope:
+      path: ""
+      type: "posts"
+    values:
+      layout: "post"
+  - scope:
+      path: ""
+    values:
+      layout: "default"
